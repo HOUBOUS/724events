@@ -1,5 +1,5 @@
 {
-  "name": "77-events",
+  "name": "Projet10",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -48,5 +48,10 @@
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.5.0",
     "prettier": "^2.6.2"
-  }
+  },
+  "description": "Debeugguer une application React",
+  "main": "index.js",
+  "repository": "https://github.com/HOUBOUS/Projet10-724Events.git",
+  "author": "Hbous",
+  "license": "MIT"
 }
