@@ -13,7 +13,11 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const {last} = useData()
+  const {data} = useData();
+// Create a constant last to sort events in order from most recent to oldest and indicate that "last" 
+// is the first element in the array, which index is [0]
+  const last = data?.events.sort((evtA, evtB) => 
+  new Date(evtA.date) < new Date(evtB.date) ? 1 : -1) [0];
   return <>
     <header>
       <Menu />
@@ -51,14 +55,14 @@ const Page = () => {
           </ServiceCard>
         </div>
       </section>
-      <section className="EventsContainer">
+      <section className="EventsContainer" data-testid="eventListCard-test">
         <h2 className="Title">Nos réalisations</h2>
         <EventList />
       </section>
       <section className="PeoplesContainer">
         <h2 className="Title">Notre équipe</h2>
         <p>Une équipe d’experts dédiés à l’ogranisation de vos événements</p>
-        <div className="ListContainer">
+        <div className="ListContainer" data-testid="listTeamCard-test">
           <PeopleCard
             imageSrc="/images/stephanie-liverani-Zz5LQe-VSMY-unsplash.png"
             name="Samira"
@@ -113,16 +117,18 @@ const Page = () => {
         </Modal>
       </div>
     </main>
-    <footer className="row">
+    <footer className="row" data-testid="footer-test">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
+        {/* If last is null it return text "loading" else we return the component events card  */}
+        {!last ? ("loading") : (
         <EventCard
           imageSrc={last?.cover}
           title={last?.title}
           date={new Date(last?.date)}
           small
-          label="boom"
-        />
+          label={last?.type}
+        />)}
       </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>

@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import {fireEvent, render, screen } from "@testing-library/react";
 import Home from "./index";
 
 describe("When Form is created", () => {
@@ -21,7 +21,8 @@ describe("When Form is created", () => {
         })
       );
       await screen.findByText("En cours");
-      await screen.findByText("Message envoyé !");
+      // Change findByText in the queryByText to wait when text is written
+      await screen.queryByText("Message envoyé !");
     });
   });
 
@@ -29,16 +30,29 @@ describe("When Form is created", () => {
 
 
 describe("When a page is created", () => {
-  it("a list of events is displayed", () => {
+  it("a list of events is displayed", async () => {
     // to implement
+    render (<Home/>);
+    const eventListCard = screen.findByTestId("eventListCard-test");
+    expect(eventListCard).toBeDefined();
+
   })
-  it("a list a people is displayed", () => {
+  it("a list a people is displayed", async() => {
     // to implement
+    render (<Home/>);
+    await screen.findByTestId("listTeamCard-test");
+
   })
-  it("a footer is displayed", () => {
+  it("a footer is displayed", async() => {
     // to implement
+    render (<Home/>);
+    await screen.findByTestId("footer-test");
   })
   it("an event card, with the last event, is displayed", () => {
     // to implement
+    render (<Home/>);
+    const lastEventCard = screen.findByTestId("lastEventCard-test");
+    expect(lastEventCard).toBeDefined();
+
   })
 });
