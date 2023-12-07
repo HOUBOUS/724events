@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+/* eslint-disable no-unsafe-optional-chaining */
+/* eslint-disable react/no-array-index-key */
+import React, {useEffect, useState } from "react";
 import { useData } from "../../contexts/DataContext";
 import { getMonth } from "../../helpers/Date";
-
 import "./style.scss";
 
 const Slider = () => {
@@ -11,10 +12,11 @@ const Slider = () => {
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
   );
+
   const nextCard = () => {
     setTimeout(
-      // Passer a length -1 comparaison avec la taille de tableau pas correcte car la taille L4INDEX DU tableau est inf à 1 
-      () => setIndex(index < byDateDesc.length -1  ? index + 1 : 0),
+      // Passer a length du tableau -1 
+      () => setIndex(index < byDateDesc?.length -1  ? index + 1 : 0),
       5000
     );
   };
@@ -24,9 +26,8 @@ const Slider = () => {
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <>
+        <React.Fragment key={`sliderEvent-${event.cover}`}>
           <div
-            key={event.title}
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
             }`}
@@ -41,22 +42,22 @@ const Slider = () => {
             </div>
           </div>
           <div className="SlideCard__paginationContainer">
-            <div className="SlideCard__pagination">
-              {byDateDesc.map((dot, radioIdx) => (
+          <div className="SlideCard__pagination">
+              {byDateDesc.map((radioEvent, radioIdx) => (
                 <input
-                  key={`${dot.id}`}
                   type="radio"
                   name="radio-button"
-                  // Change idx by index to resolve Radio-button bug
                   checked={index === radioIdx}
+                  key={`radio-${radioEvent.title}`}
+                  onChange={() => setIndex(radioIdx)}
                 />
               ))}
             </div>
           </div>
-        </>
+        </React.Fragment>
       ))}
     </div>
   );
-};
-
+              };
+  
 export default Slider;

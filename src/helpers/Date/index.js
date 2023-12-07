@@ -11,7 +11,5 @@ export const MONTHS = {
   9: "octobre",
   10: "novembre",
   11: "décembre"
-  
-};
-
+  };
 export const getMonth = (date) => MONTHS[date.getMonth()];

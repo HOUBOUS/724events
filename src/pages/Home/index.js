@@ -14,7 +14,8 @@ import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
   const {data} = useData();
-// Create a constant last to sort events in order from most recent to oldest and indicate that "last" 
+// Create a constant last to sort events in order from most 
+// recent to oldest and indicate that "last" 
 // is the first element in the array, which index is [0]
   const last = data?.events.sort((evtA, evtB) => 
   new Date(evtA.date) < new Date(evtB.date) ? 1 : -1) [0];
@@ -120,7 +121,8 @@ const Page = () => {
     <footer className="row" data-testid="footer-test">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
-        {/* If last is null it return text "loading" else we return the component events card  */}
+        {/* If last is null it return text "loading" 
+        else we return the component events card  */}
         {!last ? ("loading") : (
         <EventCard
           imageSrc={last?.cover}

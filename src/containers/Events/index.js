@@ -17,7 +17,7 @@ const EventList = () => {
   const filteredEvents = (
     (!type
       ? data?.events
-      // Add a filter of type selected 
+      // Add a filter of type selected
       : data?.events.filter((event) => event.type === type)) || []
   ).filter((event, index) => {
     if (
@@ -31,8 +31,7 @@ const EventList = () => {
   const changeType = (evtType) => {
     setCurrentPage(1);
     setType(evtType);
-    console.log(filteredEvents);
-    
+       
   };
   const pageNumber = Math.floor((filteredEvents?.length || 0) / PER_PAGE) + 1;
   const typeList = new Set(data?.events.map((event) => event.type));
